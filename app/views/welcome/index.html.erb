@@ -1,0 +1,90 @@
+<head>
+	<style>
+            body
+            {
+                background-color: #3B4A54;
+            }
+
+            #page
+            {
+                  background-color: white;
+                  overflow: auto;
+            }
+
+            #header
+            {
+                  background-color: black;
+                  padding: 30px;
+                  font-size: 50px;
+            }
+
+          	#core
+            {
+                  padding: 10px;
+            }
+
+            #signUpForm
+            {
+				border-style: solid;
+				border-width: 5px;
+				border-color: #3B4A54;
+				border-radius: 10px;
+				padding: 10px;
+				margin-top: 10px;
+            }
+
+            #loginForm
+            {
+				border-style: solid;
+				border-width: 5px;
+				border-color: #3B4A54;
+				border-radius: 10px;
+				padding: 10px;
+				margin-top: 10px;
+            }
+
+	</style>
+</head>
+
+
+
+<body>
+  <div id="page">
+
+    <div id="header">
+    	<font color="white">Blog Website</font>
+    </div>
+
+
+  <div id="core">
+
+    <div id="signUpForm">
+      <h1> Sign Up </h1>
+      <%= render "users/form" %>
+    </div>
+
+    <div id="loginForm">
+      <h1> Log In </h1>
+      <%= render "sessions/form" %>
+    </div>
+
+  </div>
+
+  </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

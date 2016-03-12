@@ -1,0 +1,142 @@
+<head>
+      <style>
+            body
+            {
+                  background-color: #3B4A54;
+            }
+
+            #page
+            {
+                  background-color: white;
+            }
+
+            #header
+            {
+                  background-color: black;
+                  padding: 30px;
+                  font-size: 50px;
+            }
+
+            #core
+            {
+                  padding: 10px;
+            }
+
+            #postForm
+            {
+                  border-bottom-style: solid;
+                  border-width: 4px;
+                  border-color: #3B4A54;
+                  padding: 10px;
+            }
+
+            #posts
+            {
+                  border-style: solid;
+                  border-width: 5px;
+                  border-color: #3B4A54;
+                  border-radius: 10px;
+                  padding: 10px;
+                  margin-top: 10px;
+            }
+
+            #comments
+            {
+                  border-top-style: solid;
+                  border-width: 1px;
+                  border-color: #3B4A54;
+                  padding: 10px;
+                  margin-top: 10px;
+            }
+
+            #logout
+            {
+                  float: right;
+                  font-size: 20px;
+                  padding-right: 5px;
+            }
+
+            #showUsers
+            {
+                  float: right;
+                  font-size: 20px;
+                  padding-right: 5px;
+            }
+
+
+      </style>
+</head>
+
+<body>
+
+      <div id="page">
+            <div id="header">
+                  <div id="title"><font color="white"><%= current_user.firstname %>'s Page</font></div>
+            </div>     
+
+            <div id="logout"><%= link_to "Log out", logout_path, method: :delete %> </div>
+
+            <% if checkAdmin %>
+                  <br><br>
+
+                  <div id="showUsers"><%= link_to "Show Users", show_path %> </div>
+            <% end %>
+
+
+
+
+            <div id="core">
+
+                  <div id="postForm">
+                        <%= render "posts/form" %>
+                  </div>
+
+            	<% @posts = Post.all.reverse %>
+
+            	<% @posts.each do |post| %>
+
+                        <div id="posts">   
+                        	<h3><%= post.title %> by: <%= post.user.firstname %> <%= post.user.lastname %></h3>
+
+                        	<%= post.content %><br><br>
+
+                        	<% if check(post.user) %>
+                        	<%=		link_to 'Edit', edit_post_path(post) %> | 
+                        	<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        	<% end %>
+                       
+                        	<%= render "comments/form", :post => post %>
+                        	<% @comments = post.comments.reverse %>
+
+                        	<% @comments.each do |comment| %>
+                                    <div id="comments">
+                              		<%= comment.content %><br>
+                                          <% if check(comment.user) %>
+                                          <%= link_to 'Edit', edit_comment_path(comment) %> | 
+                                          <%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
+                                          <% end %>
+                                    </div>
+                        	<% end %>
+                        </div>
+
+                  <% end %>
+            </div>
+      </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
